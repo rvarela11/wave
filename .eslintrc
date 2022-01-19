@@ -4,10 +4,11 @@
     "browser": true,
     "jest": true
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "rules": {
         "arrow-body-style": ["error", "as-needed"],
         "comma-dangle": ["error", "never"],
+        "default-param-last": "off",
         "function-paren-newline": ["error", "consistent"],
         "import/no-named-as-default": 0,
         "import/prefer-default-export": 0,
@@ -28,6 +29,11 @@
         "react/jsx-indent-props": ["error", 4],
         "react/no-array-index-key": 0,
         "react/no-typos": 0,
-        "react/prefer-stateless-function": [2, { "ignorePureComponents": true }]
+        "react/prefer-stateless-function": [2, { "ignorePureComponents": true }],
+        "react/function-component-definition": [2, {
+          "namedComponents": "arrow-function",
+          "unnamedComponents": "arrow-function"
+        }]
+        
     }
 }
