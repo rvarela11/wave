@@ -7,12 +7,13 @@ export const walletConnection = async () => {
 
     try {
         const { ethereum } = window;
-        const accounts = await ethereum.request({ method: 'eth_accounts' });
-        console.log({ accounts });
 
-        if (ethereum) {
-            metaMask.hasWallet = true;
+        if (!ethereum) {
+            return metaMask;
         }
+
+        metaMask.hasWallet = true;
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
 
         if (accounts.length !== 0) {
             metaMask.account = [accounts];
