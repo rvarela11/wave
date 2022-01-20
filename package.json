@@ -2,7 +2,7 @@
   "name": "cra_redux",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rvarela11.github.io/cra_2-redux",
+  "homepage": "https://rvarela11.github.io/wave",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",

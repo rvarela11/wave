@@ -1,15 +1,40 @@
 // @vendors
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// @actions
+import { updateMetaMask } from '../../actions/index';
 
 // @components
 import Header from '../Header';
+import MetaMask from '../MetaMask';
+
+// @utils
+import { walletConnection } from '../helpers';
 
 const App = () => {
-    console.log('YO');
+    const dispatch = useDispatch();
+    const { metaMask = {} } = useSelector((state) => state.user);
+    console.log({ metaMask });
+
+    useEffect(async () => {
+        const wallet = await walletConnection();
+        dispatch(updateMetaMask(wallet));
+    }, []);
+
+    if (!metaMask.account) {
+        return (
+            <>
+                <Header />
+                <MetaMask hasWallet={metaMask.hasWallet} />
+            </>
+        );
+    }
+
     return (
         <>
             <Header />
-            <p>Howdy</p>
+            <p>Account Found</p>
         </>
     );
 };
