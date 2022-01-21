@@ -7,5 +7,11 @@
 }
 
 .download-metaMask__image {
+  width: 664px;
   max-width: 100%;
 }
+
+.download-metaMask__image > img {
+  max-width: 100%;
+}
+
