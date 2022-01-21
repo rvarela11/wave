@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // @actions
-import { updateMetaMask } from '../../actions/index';
+import { updateMetaMask } from '../../store/actions';
 
 // @components
 import Header from '../Header';

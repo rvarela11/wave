@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 // @actions
-import { updateMetaMask } from '../../../actions/index';
+import { updateMetaMask } from '../../../store/actions';
 
 // @utils
 import { connectWallet } from '../../helpers';

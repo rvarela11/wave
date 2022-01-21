@@ -10,7 +10,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import App from './components/App';
 
 // @reducers
-import { reducer } from './reducers';
+import { reducer } from './store/reducers';
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
