@@ -1,12 +1,15 @@
 // @vendors
 import React from 'react';
 
+// @material-ui
+import Typography from '@mui/material/Typography';
+
 // @style
 import './style.css';
 
 const Header = () => (
     <header>
-        <h2 className="header">Wave</h2>
+        <Typography align="center" component="h1" variant="h2">Wave</Typography>
     </header>
 );
 

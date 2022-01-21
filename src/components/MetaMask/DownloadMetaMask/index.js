@@ -1,17 +1,22 @@
 // @vendors
 import React from 'react';
 
+// @material-ui
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
+// @style
+import './style.css';
+
 const DownloadMetaMask = () => (
-    <div className="TabContentItem__Item-cagrht-0 cfLtLY">
-        <h2 className="DownloadTab__Heading-f1ft5t-0 bYrtcy">Install MetaMask for your browser</h2>
-        <div className="DownloadTab__ImageWrapper-f1ft5t-1 hsMbgO">
-            <img src="https://images.ctfassets.net/9sy2a0egs6zh/6ngCUoU36ABPjs6cDNnuoK/a4b9e978595248dbb685aa2c53e3f4dc/download-extension.png" alt="A screenshot of the MetaMask browser Extension" />
-        </div>
-        <div className="DownloadTab__DownLoadWrapper-f1ft5t-2 fFjDvV">
-            <div className="DownloadTab__Buttons-f1ft5t-3 gbzYnJ">
-                <a href="https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank" rel="noreferrer">Install MetaMask for Chrome</a>
-            </div>
-        </div>
+    <div className="download-metaMask">
+        <Typography component="h5" variant="h5">MetaMask is needed for this website</Typography>
+        <Button href="https://metamask.io/download" target="_blank" variant="contained">Install MetaMask</Button>
+        <img
+            alt="A screenshot of the MetaMask browser Extension"
+            className="download-metaMask__image"
+            src="https://images.ctfassets.net/9sy2a0egs6zh/6ngCUoU36ABPjs6cDNnuoK/a4b9e978595248dbb685aa2c53e3f4dc/download-extension.png"
+        />
     </div>
 );
 
