@@ -1,4 +1,5 @@
-.download-metaMask {
+.metaMask {
+  border: 1px solid red;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -6,12 +7,17 @@
   gap: 24px;  
 }
 
-.download-metaMask__image {
+.metaMask-buttons {
+  display: flex;
+  gap: 24px;
+}
+
+.metaMask-image {
   width: 664px;
   max-width: 100%;
 }
 
-.download-metaMask__image > img {
+.metaMask-image > img {
   max-width: 100%;
 }
 

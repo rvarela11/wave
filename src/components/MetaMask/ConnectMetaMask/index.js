@@ -1,6 +1,10 @@
 // @vendors
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+
+// @material-ui
+import Button from '@mui/material/Button';
 
 // @actions
 import { updateMetaMask } from '../../../store/actions';
@@ -8,7 +12,7 @@ import { updateMetaMask } from '../../../store/actions';
 // @utils
 import { connectWallet } from '../../helpers';
 
-const ConnectMetaMask = () => {
+const ConnectMetaMask = ({ disabled }) => {
     const dispatch = useDispatch();
 
     const handleOnClick = useCallback(async () => {
@@ -17,18 +21,23 @@ const ConnectMetaMask = () => {
     }, []);
 
     return (
-        <div className="TabContentItem__Item-cagrht-0 cfLtLY">
-            <h2 className="DownloadTab__Heading-f1ft5t-0 bYrtcy">Connect to MetaMask</h2>
-            <div className="DownloadTab__ImageWrapper-f1ft5t-1 hsMbgO">
-                <p>Image</p>
-            </div>
-            <div className="DownloadTab__DownLoadWrapper-f1ft5t-2 fFjDvV">
-                <div className="DownloadTab__Buttons-f1ft5t-3 gbzYnJ">
-                    <button className="waveButton" onClick={handleOnClick} type="button">Connect to MetaMask</button>
-                </div>
-            </div>
-        </div>
+        <Button
+            disabled={disabled}
+            onClick={handleOnClick}
+            size="large"
+            variant="contained"
+        >
+            Connect to MetaMask
+        </Button>
     );
+};
+
+ConnectMetaMask.propTypes = {
+    disabled: PropTypes.bool
+};
+
+ConnectMetaMask.defaultProps = {
+    disabled: false
 };
 
 export default ConnectMetaMask;
