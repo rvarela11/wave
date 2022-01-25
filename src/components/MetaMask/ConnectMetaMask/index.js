@@ -24,10 +24,9 @@ const ConnectMetaMask = ({ disabled }) => {
         <Button
             disabled={disabled}
             onClick={handleOnClick}
-            size="large"
             variant="contained"
         >
-            Connect to MetaMask
+            Connect
         </Button>
     );
 };

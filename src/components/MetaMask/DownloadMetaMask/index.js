@@ -9,11 +9,10 @@ const DownloadMetaMask = ({ disabled }) => (
     <Button
         disabled={disabled}
         href="https://metamask.io/download"
-        size="large"
         target="_blank"
         variant="contained"
     >
-        Download MetaMask
+        Download
     </Button>
 );
 
