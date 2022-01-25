@@ -26,7 +26,7 @@ const ConnectMetaMask = ({ disabled }) => {
             onClick={handleOnClick}
             variant="contained"
         >
-            Connect
+            Connect MetaMask
         </Button>
     );
 };

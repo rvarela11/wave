@@ -7,9 +7,15 @@
 }
 
 .metaMask-buttons {
-  width: 332px;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px
+}
+
+.metaMask-buttons > button {
+  width: 205px;
 }
 
 .metaMask-image {
@@ -20,4 +26,3 @@
 .metaMask-image > img {
   max-width: 100%;
 }
-

@@ -12,7 +12,7 @@ const DownloadMetaMask = ({ disabled }) => (
         target="_blank"
         variant="contained"
     >
-        Download
+        Download MetaMask
     </Button>
 );
 
