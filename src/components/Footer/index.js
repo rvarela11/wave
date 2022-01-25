@@ -9,7 +9,13 @@ import './style.css';
 
 const Footer = () => (
     <footer>
-        <Typography align="center" component="h6" variant="h6">Footer</Typography>
+        <Typography
+            align="center"
+            component="h6"
+            variant="h6"
+        >
+            This website uses MetaMask Rinkeby Test Network
+        </Typography>
     </footer>
 );
 
