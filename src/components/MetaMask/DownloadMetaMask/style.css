@@ -1,0 +1,17 @@
+.download-metaMask {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;  
+}
+
+.download-metaMask__image {
+  width: 664px;
+  max-width: 100%;
+}
+
+.download-metaMask__image > img {
+  max-width: 100%;
+}
+

@@ -3,7 +3,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;  
+  gap: 48px;
+}
+
+.metaMask-image {
+  width: 664px;
+  max-width: 100%;
+}
+
+.metaMask-image > img {
+  max-width: 100%;
 }
 
 .metaMask-buttons {
@@ -18,11 +27,30 @@
   width: 205px;
 }
 
-.metaMask-image {
-  width: 664px;
-  max-width: 100%;
+.metaMask-downloadBrowser {
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f7f9fb;
 }
 
-.metaMask-image > img {
-  max-width: 100%;
+.metaMask-downloadBrowser__message {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.metaMask-downloadBrowser__imgage-list {
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.metaMask-downloadBrowser__imgage-list > img {
+  width: 50px;
+  height: 50px;
 }

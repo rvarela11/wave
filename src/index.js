@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 
 // @material-ui
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
 
 // @containers
 import App from './components/App';
@@ -21,13 +20,7 @@ import './css--reset.css';
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 // Setting the Material-UI theme
-const theme = createTheme({
-    typography: {
-        h5: {
-            color: grey[700]
-        }
-    }
-});
+const theme = createTheme({});
 
 ReactDOM.render(
     <Provider store={store}>
