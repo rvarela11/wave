@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // @components
 import Header from '../Header';
 import MetaMask from '../MetaMask';
+import Dashboard from '../Dashboard';
 import Footer from '../Footer';
 
 // @actions
@@ -19,7 +20,7 @@ import './style.css';
 const App = () => {
     const dispatch = useDispatch();
     const { metaMask = {} } = useSelector((state) => state.user);
-    const content = (!metaMask.account) ? <MetaMask hasWallet={metaMask.hasWallet} /> : <p>Account Found</p>;
+    const content = (!metaMask.account) ? <MetaMask hasWallet={metaMask.hasWallet} /> : <Dashboard />;
 
     useEffect(async () => {
         const wallet = await walletConnection();
