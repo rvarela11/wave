@@ -1,4 +1,5 @@
 const initialState = {
+    isLoading: true,
     user: {}
 };
 
@@ -7,6 +8,7 @@ export const reducer = (state = initialState, action) => {
         case 'UPDATE_METAMASK':
             return {
                 ...state,
+                isLoading: false,
                 user: {
                     ...state.user,
                     metaMask: action.metaMask

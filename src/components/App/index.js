@@ -2,6 +2,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+// @material-ui
+import CircularProgress from '@mui/material/CircularProgress';
+
 // @components
 import Header from '../Header';
 import MetaMask from '../MetaMask';
@@ -19,13 +22,17 @@ import './style.css';
 
 const App = () => {
     const dispatch = useDispatch();
-    const { metaMask = {} } = useSelector((state) => state.user);
-    const content = (!metaMask.account) ? <MetaMask hasWallet={metaMask.hasWallet} /> : <Dashboard />;
+    const { isLoading, user: { metaMask = {} } } = useSelector((state) => state);
+    let content = (!metaMask.account) ? <MetaMask hasWallet={metaMask.hasWallet} /> : <Dashboard />;
 
     useEffect(async () => {
         const wallet = await walletConnection();
         dispatch(updateMetaMask(wallet));
     }, []);
+
+    if (isLoading) {
+        content = <CircularProgress />;
+    }
 
     return (
         <div className="app">
