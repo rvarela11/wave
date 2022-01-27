@@ -2,6 +2,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+// @components
+import CreatePost from './create-post';
+
 // @actions
 import { getFriends } from '../../store/actions';
 
@@ -14,6 +17,7 @@ const Dashboard = () => {
 
     return (
         <div>
+            <CreatePost />
             <p>Friends</p>
             <ul>
                 { friends.map(({ addr }) => <li key={addr}>{`address: ${addr}`}</li>)}

@@ -10,7 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 // @containers
-import App from './components/App';
+import App from './components/app';
 
 // @reducers
 import { reducer } from './store/reducers';

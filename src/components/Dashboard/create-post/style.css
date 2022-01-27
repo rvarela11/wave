@@ -1,0 +1,9 @@
+.create-post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.create-post-actions {
+  justify-content: flex-end;
+}

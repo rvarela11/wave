@@ -9,8 +9,8 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 // @components
-import ConnectMetaMask from './ConnectMetaMask';
-import DownloadMetaMask from './DownloadMetaMask';
+import ConnectMetaMask from './connect-meta-mask';
+import DownloadMetaMask from './download-meta-mask';
 
 // @style
 import './style.css';

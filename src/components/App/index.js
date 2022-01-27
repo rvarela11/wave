@@ -7,10 +7,10 @@ import className from 'classnames';
 import CircularProgress from '@mui/material/CircularProgress';
 
 // @components
-import Header from '../Header';
-import MetaMask from '../MetaMask';
-import Dashboard from '../Dashboard';
-import Footer from '../Footer';
+import Header from '../header';
+import MetaMask from '../meta-mask';
+import Dashboard from '../dashboard';
+import Footer from '../footer';
 
 // @actions
 import { updateMetaMask } from '../../store/actions';
