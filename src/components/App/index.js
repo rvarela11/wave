@@ -1,6 +1,7 @@
 // @vendors
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import className from 'classnames';
 
 // @material-ui
 import CircularProgress from '@mui/material/CircularProgress';
@@ -37,7 +38,14 @@ const App = () => {
     return (
         <div className="app">
             <Header />
-            <div className="content">{content}</div>
+            <div
+                className={className(
+                    'content',
+                    { metaMask: !metaMask.account }
+                )}
+            >
+                {content}
+            </div>
             <Footer />
         </div>
     );

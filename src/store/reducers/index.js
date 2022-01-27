@@ -1,5 +1,6 @@
 const initialState = {
     isLoading: true,
+    friends: [],
     user: {}
 };
 
@@ -13,6 +14,11 @@ export const reducer = (state = initialState, action) => {
                     ...state.user,
                     metaMask: action.metaMask
                 }
+            };
+        case 'GET_FRIENDS':
+            return {
+                ...state,
+                friends: [...action.friends]
             };
         default:
             return state;

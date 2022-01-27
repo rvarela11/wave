@@ -1,9 +1,10 @@
 // @vendors
 import React from 'react';
 import ReactDOM from 'react-dom';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // @material-ui
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -17,7 +18,7 @@ import { reducer } from './store/reducers';
 // @style
 import './css--reset.css';
 
-const store = createStore(reducer, applyMiddleware(thunkMiddleware));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 // Setting the Material-UI theme
 const theme = createTheme({});
