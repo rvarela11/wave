@@ -6,21 +6,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreatePost from './create-post';
 
 // @actions
-import { getFriends } from '../../store/actions';
+import { getAllPosts } from '../../store/actions/posts';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
-    const { friends } = useSelector((state) => state);
-    console.log({ friends });
+    const { posts } = useSelector((state) => state);
+    console.log({ posts });
 
-    useEffect(() => dispatch(getFriends()), []);
+    useEffect(() => dispatch(getAllPosts()), []);
 
     return (
         <div>
             <CreatePost />
-            <p>Friends</p>
+            <p>Posts</p>
             <ul>
-                { friends.map(({ addr }) => <li key={addr}>{`address: ${addr}`}</li>)}
+                { posts.map(({ addr, message }) => (
+                    <>
+                        <li key={addr}>{`Address: ${addr}`}</li>
+                        <li key={addr}>{`Message: ${message}`}</li>
+                    </>
+                ))}
             </ul>
         </div>
     );

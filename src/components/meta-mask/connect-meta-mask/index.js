@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 
 // @actions
-import { updateMetaMask } from '../../../store/actions';
+import { updateMetaMask } from '../../../store/actions/meta-mask';
 
 // @utils
 import { connectWallet } from '../../helpers';

@@ -1,23 +1,14 @@
-import { getWavePortalContract } from '../../contracts/wave-portal';
+export const REQUEST = 'REQUEST';
+export const SUCCESS = 'SUCCESS';
+export const FAILURE = 'FAILURE';
 
-export const UPDATE_METAMASK = 'UPDATE_METAMASK';
-export const updateMetaMask = (metaMask) => ({
-    type: UPDATE_METAMASK,
-    metaMask
+export const createRequestTypes = (base) => [REQUEST, SUCCESS, FAILURE].reduce((accumulator, type) => {
+    // eslint-disable-next-line no-param-reassign
+    accumulator[type] = `${base}_${type}`;
+    return accumulator;
+}, {});
+
+export const createAction = (type, payload = {}) => ({
+    type,
+    ...payload
 });
-
-export const GET_FRIENDS = 'GET_FRIENDS';
-export const getFriends = () => async (dispatch) => {
-    let friends = [];
-    try {
-        const { ethereum } = window;
-        const wavePortalContract = getWavePortalContract(ethereum);
-        friends = await wavePortalContract.getTotalFriends();
-    } catch (error) {
-        console.log(error);
-    }
-    dispatch({
-        type: GET_FRIENDS,
-        friends
-    });
-};

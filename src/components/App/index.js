@@ -13,7 +13,7 @@ import Dashboard from '../dashboard';
 import Footer from '../footer';
 
 // @actions
-import { updateMetaMask } from '../../store/actions';
+import { updateMetaMask } from '../../store/actions/meta-mask';
 
 // @utils
 import { walletConnection } from '../helpers';
@@ -23,7 +23,7 @@ import './style.css';
 
 const App = () => {
     const dispatch = useDispatch();
-    const { isLoading, user: { metaMask = {} } } = useSelector((state) => state);
+    const { isLoading, metaMask = {} } = useSelector((state) => state.user);
     let content = (!metaMask.account) ? <MetaMask hasWallet={metaMask.hasWallet} /> : <Dashboard />;
 
     useEffect(async () => {

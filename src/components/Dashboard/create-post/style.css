@@ -1,3 +1,10 @@
+.create-post-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .create-post-content {
   display: flex;
   flex-direction: column;

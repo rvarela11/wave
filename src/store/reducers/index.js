@@ -1,7 +1,21 @@
+// @actionTypes
+import * as types from '../actions/actionTypes';
+
+// @utiles
+import {
+    REQUEST,
+    SUCCESS,
+    FAILURE
+} from '../actions';
+
 const initialState = {
-    isLoading: true,
-    friends: [],
-    user: {}
+    post: {
+        isLoading: false
+    },
+    posts: [],
+    user: {
+        isLoading: true
+    }
 };
 
 export const reducer = (state = initialState, action) => {
@@ -9,16 +23,40 @@ export const reducer = (state = initialState, action) => {
         case 'UPDATE_METAMASK':
             return {
                 ...state,
-                isLoading: false,
                 user: {
                     ...state.user,
+                    isLoading: false,
                     metaMask: action.metaMask
                 }
             };
-        case 'GET_FRIENDS':
+        case 'GET_ALL_POSTS':
             return {
                 ...state,
-                friends: [...action.friends]
+                posts: [...action.posts]
+            };
+        case types.CREATE_POST[REQUEST]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    isLoading: true
+                }
+            };
+        case types.CREATE_POST[SUCCESS]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    isLoading: false
+                }
+            };
+        case types.CREATE_POST[FAILURE]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    isLoading: false
+                }
             };
         default:
             return state;
