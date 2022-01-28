@@ -10,12 +10,12 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const PostCard = ({ addr, message }) => (
+const PostCard = ({ addr, message, timestamp }) => (
     <Card sx={{ width: 500 }}>
         <CardHeader
             avatar={<Avatar aria-label="Avatar"><AccountCircleIcon /></Avatar>}
             title={addr}
-            subheader="September 14, 2016"
+            subheader={timestamp}
         />
         <CardContent>
             <Typography component="h6" variant="h6">{message}</Typography>
@@ -25,8 +25,8 @@ const PostCard = ({ addr, message }) => (
 
 PostCard.propTypes = {
     addr: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired
-    // timestamp: PropTypes.object.isRequired
+    message: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired
 };
 
 export default PostCard;

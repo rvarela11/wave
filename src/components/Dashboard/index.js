@@ -1,6 +1,7 @@
 // @vendors
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 
 // @components
 import CreatePost from './create-post';
@@ -50,7 +51,7 @@ const Dashboard = () => {
                         key={index}
                         addr={addr}
                         message={message}
-                        timestamp={timestamp}
+                        timestamp={moment(timestamp).format('LL')}
                     />
                 ))}
             </div>
