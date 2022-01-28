@@ -17,6 +17,8 @@ import { clearPost, createPost } from '../../../store/actions/posts';
 // @style
 import './style.css';
 
+const CHARACTER_LIMIT = 280;
+
 const CreatePost = () => {
     const dispatch = useDispatch();
     const { error, isLoading } = useSelector((state) => state.post);
@@ -48,9 +50,10 @@ const CreatePost = () => {
                 <Typography align="center" component="h5" variant="h5">Create post</Typography>
                 <TextField
                     error={postError !== undefined}
-                    helperText={postError}
+                    helperText={`${value.length} / ${CHARACTER_LIMIT} ${postError || ''}`}
                     fullWidth
                     id="textfield-create-a-post"
+                    inputProps={{ maxLength: CHARACTER_LIMIT }}
                     label="What's on your mind?"
                     onChange={handleChange}
                     multiline

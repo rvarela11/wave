@@ -18,7 +18,7 @@ import './style.css';
 const Dashboard = () => {
     const dispatch = useDispatch();
     const { posts } = useSelector((state) => state);
-    console.log({ posts });
+
     useEffect(() => dispatch(getAllPosts()), []);
 
     useEffect(() => {
