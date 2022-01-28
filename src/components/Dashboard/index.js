@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
+// @material-ui
+import Typography from '@mui/material/Typography';
+
 // @components
 import CreatePost from './create-post';
 import PostCard from './post-card';
@@ -42,9 +45,9 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div>
+        <div className="dashboard">
             <CreatePost />
-            <p>Posts</p>
+            <Typography align="center" component="h5" variant="h5">Posts</Typography>
             <div className="posts">
                 { posts.map(({ addr, message, timestamp }, index) => (
                     <PostCard

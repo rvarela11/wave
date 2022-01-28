@@ -1,3 +1,9 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .posts {
   display: flex;
   flex-direction: column;

@@ -48,7 +48,7 @@ const CreatePost = () => {
     return (
         <Card sx={{ width: 500, height: 235 }}>
             <CardContent className="create-post-content">
-                <Typography align="center" component="h5" variant="h5">Create post</Typography>
+                <Typography align="center" component="h5" variant="h5">Create a post</Typography>
                 <TextField
                     error={postError !== undefined}
                     helperText={`${value.length} / ${CHARACTER_LIMIT} ${errorHelperText}`}
