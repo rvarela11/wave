@@ -18,14 +18,13 @@ const Dashboard = () => {
         <div>
             <CreatePost />
             <p>Posts</p>
-            <ul>
-                { posts.map(({ addr, message }) => (
-                    <>
-                        <li key={addr}>{`Address: ${addr}`}</li>
-                        <li key={addr}>{`Message: ${message}`}</li>
-                    </>
-                ))}
-            </ul>
+            { posts.map(({ addr, message, timestamp }) => (
+                <ul>
+                    <li key={addr}>{`Address: ${addr}`}</li>
+                    <li key={addr}>{`Message: ${message}`}</li>
+                    <li key={addr}>{`Time: ${timestamp}`}</li>
+                </ul>
+            ))}
         </div>
     );
 };
