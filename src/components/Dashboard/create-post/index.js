@@ -25,6 +25,7 @@ const CreatePost = () => {
 
     const [value, setValue] = useState('');
     const [postError, setPostError] = useState(undefined);
+    const errorHelperText = (postError) ? `- ${postError}` : '';
 
     const handleChange = useCallback((e) => setValue(e.target.value));
     const handleClear = useCallback(() => {
@@ -50,7 +51,7 @@ const CreatePost = () => {
                 <Typography align="center" component="h5" variant="h5">Create post</Typography>
                 <TextField
                     error={postError !== undefined}
-                    helperText={`${value.length} / ${CHARACTER_LIMIT} ${postError || ''}`}
+                    helperText={`${value.length} / ${CHARACTER_LIMIT} ${errorHelperText}`}
                     fullWidth
                     id="textfield-create-a-post"
                     inputProps={{ maxLength: CHARACTER_LIMIT }}
