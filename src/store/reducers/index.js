@@ -34,6 +34,11 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 posts: [...action.posts]
             };
+        case types.UPDATE_ALL_POSTS:
+            return {
+                ...state,
+                posts: [...state.posts, action.post]
+            };
         case types.CREATE_POST[REQUEST]:
             return {
                 ...state,

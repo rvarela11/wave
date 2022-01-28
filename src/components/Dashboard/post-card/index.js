@@ -18,7 +18,7 @@ const PostCard = ({ addr, message }) => (
             subheader="September 14, 2016"
         />
         <CardContent>
-            <Typography align="center" component="h6" variant="h6">{message}</Typography>
+            <Typography component="h6" variant="h6">{message}</Typography>
         </CardContent>
     </Card>
 );

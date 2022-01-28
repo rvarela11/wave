@@ -33,12 +33,19 @@ export const getAllPosts = () => async (dispatch) => {
     });
 };
 
+export const updateAllPosts = (post) => async (dispatch) => {
+    dispatch({
+        type: types.UPDATE_ALL_POSTS,
+        post
+    });
+};
+
 export const createPost = (message) => async (dispatch) => {
     try {
         const { ethereum } = window;
         const wavePortalContract = getWavePortalContract(ethereum);
         dispatch(createPostActions.request());
-        const postTxn = await wavePortalContract.newPost(message);
+        const postTxn = await wavePortalContract.newPost(message, { gasLimit: 300000 });
         await postTxn.wait();
         dispatch(createPostActions.success());
         dispatch(getAllPosts());

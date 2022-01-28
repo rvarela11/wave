@@ -7,7 +7,10 @@ import CreatePost from './create-post';
 import PostCard from './post-card';
 
 // @actions
-import { getAllPosts } from '../../store/actions/posts';
+import { getAllPosts, updateAllPosts } from '../../store/actions/posts';
+
+// @contracts
+import { getWavePortalContract } from '../../contracts/wave-portal';
 
 // @style
 import './style.css';
@@ -17,6 +20,25 @@ const Dashboard = () => {
     const { posts } = useSelector((state) => state);
     console.log({ posts });
     useEffect(() => dispatch(getAllPosts()), []);
+
+    useEffect(() => {
+        let wavePortalContract;
+        const onNewPost = (addr, message, timestamp) => {
+            const post = { addr, message, timestamp };
+            dispatch(updateAllPosts(post));
+        };
+
+        if (window.ethereum) {
+            wavePortalContract = getWavePortalContract(window.ethereum);
+            wavePortalContract.on('NewPost', onNewPost);
+        }
+
+        return () => {
+            if (wavePortalContract) {
+                wavePortalContract.off('NewPost', onNewPost);
+            }
+        };
+    }, []);
 
     return (
         <div>
