@@ -7,3 +7,4 @@ export const UPDATE_METAMASK = 'UPDATE_METAMASK';
 export const GET_ALL_POSTS = 'GET_ALL_POSTS';
 export const UPDATE_ALL_POSTS = 'UPDATE_ALL_POSTS';
 export const CREATE_POST = createRequestTypes('CREATE_POST');
+export const CLEAR_POST = 'CLEAR_POST';

@@ -10,6 +10,7 @@ import {
 
 const initialState = {
     post: {
+        error: undefined,
         isLoading: false
     },
     posts: [],
@@ -52,6 +53,7 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 post: {
                     ...state.post,
+                    error: undefined,
                     isLoading: false
                 }
             };
@@ -60,7 +62,15 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 post: {
                     ...state.post,
+                    error: action.error,
                     isLoading: false
+                }
+            };
+        case types.CLEAR_POST:
+            return {
+                ...state,
+                post: {
+                    ...initialState.post
                 }
             };
         default:

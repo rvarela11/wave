@@ -48,9 +48,14 @@ export const createPost = (message) => async (dispatch) => {
         const postTxn = await wavePortalContract.newPost(message, { gasLimit: 300000 });
         await postTxn.wait();
         dispatch(createPostActions.success());
-        dispatch(getAllPosts());
     } catch (error) {
         console.log(error);
-        dispatch(createPostActions.failure(error));
+        const { code, message } = error;
+        const errorMessage = (code === 4001) ? message : 'Transaction failed';
+        dispatch(createPostActions.failure(errorMessage));
     }
 };
+
+export const clearPost = () => ({
+    type: types.CLEAR_POST
+});
