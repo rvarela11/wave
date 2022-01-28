@@ -1,11 +1,15 @@
 // @actionTypes
 import * as types from '../actionTypes';
+
+// @utiles
 import {
     createAction,
     REQUEST,
     SUCCESS,
     FAILURE
 } from '../index';
+
+// @contracts
 import { getWavePortalContract } from '../../../contracts/wave-portal';
 
 export const createPostActions = {
@@ -23,9 +27,8 @@ export const getAllPosts = () => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-    console.log({ posts });
     dispatch({
-        type: 'GET_ALL_POSTS',
+        type: types.GET_ALL_POSTS,
         posts
     });
 };

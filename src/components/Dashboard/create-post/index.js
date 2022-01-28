@@ -28,7 +28,7 @@ const CreatePost = () => {
         dispatch(createPost(value));
         handleClear();
     };
-    console.log({ isLoading });
+
     return (
         <Card sx={{ width: 500, height: 220 }}>
             { isLoading && <div className="create-post-loading"><CircularProgress /></div>}

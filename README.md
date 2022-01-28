@@ -1,9 +1,18 @@
-# [Create React App Boilerplate](https://github.com/facebookincubator/create-react-app)
+# Wave
 
 ### About
 
-I have included the following to the create-react-app:
+Messaging Web3 App on Ethereum with Solidity + Smart Contracts
 
-1. Redux
+### Technologies
+
+1. React
+2. Redux
+3. Ethers
+4. Solidity
+
+### Others
+
+1. Responsive design
 2. Eslint Airbnb
 3. Material UI

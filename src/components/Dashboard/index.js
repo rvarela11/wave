@@ -11,7 +11,6 @@ import { getAllPosts } from '../../store/actions/posts';
 const Dashboard = () => {
     const dispatch = useDispatch();
     const { posts } = useSelector((state) => state);
-    console.log({ posts });
 
     useEffect(() => dispatch(getAllPosts()), []);
 

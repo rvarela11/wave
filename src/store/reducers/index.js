@@ -20,7 +20,7 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'UPDATE_METAMASK':
+        case types.UPDATE_METAMASK:
             return {
                 ...state,
                 user: {
@@ -29,7 +29,7 @@ export const reducer = (state = initialState, action) => {
                     metaMask: action.metaMask
                 }
             };
-        case 'GET_ALL_POSTS':
+        case types.GET_ALL_POSTS:
             return {
                 ...state,
                 posts: [...action.posts]
