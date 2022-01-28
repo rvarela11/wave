@@ -4,27 +4,34 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // @components
 import CreatePost from './create-post';
+import PostCard from './post-card';
 
 // @actions
 import { getAllPosts } from '../../store/actions/posts';
 
+// @style
+import './style.css';
+
 const Dashboard = () => {
     const dispatch = useDispatch();
     const { posts } = useSelector((state) => state);
-
+    console.log({ posts });
     useEffect(() => dispatch(getAllPosts()), []);
 
     return (
         <div>
             <CreatePost />
             <p>Posts</p>
-            { posts.map(({ addr, message, timestamp }) => (
-                <ul>
-                    <li key={addr}>{`Address: ${addr}`}</li>
-                    <li key={addr}>{`Message: ${message}`}</li>
-                    <li key={addr}>{`Time: ${timestamp}`}</li>
-                </ul>
-            ))}
+            <div className="posts">
+                { posts.map(({ addr, message, timestamp }, index) => (
+                    <PostCard
+                        key={index}
+                        addr={addr}
+                        message={message}
+                        timestamp={timestamp}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
