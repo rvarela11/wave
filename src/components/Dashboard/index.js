@@ -11,7 +11,7 @@ import CreatePost from './create-post';
 import PostCard from './post-card';
 
 // @actions
-import { getAllPosts, updateAllPosts } from '../../store/actions/posts';
+import { getAllPosts, setAllPosts, updateAllPosts } from '../../store/actions/posts';
 
 // @contracts
 import { getWavePortalContract } from '../../contracts/wave-portal';
@@ -32,14 +32,20 @@ const Dashboard = () => {
             dispatch(updateAllPosts(post));
         };
 
+        const onDeletePost = (posts) => {
+            dispatch(setAllPosts(posts));
+        };
+
         if (window.ethereum) {
             wavePortalContract = getWavePortalContract(window.ethereum);
             wavePortalContract.on('NewPost', onNewPost);
+            wavePortalContract.on('DeletePost', onDeletePost);
         }
 
         return () => {
             if (wavePortalContract) {
                 wavePortalContract.off('NewPost', onNewPost);
+                wavePortalContract.off('DeletePost', onDeletePost);
             }
         };
     }, []);
@@ -53,6 +59,7 @@ const Dashboard = () => {
                     <PostCard
                         key={index}
                         addr={addr}
+                        index={index}
                         message={message}
                         timestamp={moment(timestamp).format('LL')}
                     />

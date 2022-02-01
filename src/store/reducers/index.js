@@ -10,8 +10,14 @@ import {
 
 const initialState = {
     post: {
-        error: undefined,
-        isLoading: false
+        create: {
+            error: undefined,
+            isLoading: false
+        },
+        delete: {
+            error: undefined,
+            isLoading: false
+        }
     },
     posts: [],
     user: {
@@ -35,6 +41,11 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 posts: [...action.posts]
             };
+        case types.SET_ALL_POSTS:
+            return {
+                ...state,
+                posts: [...action.posts]
+            };
         case types.UPDATE_ALL_POSTS:
             return {
                 ...state,
@@ -45,7 +56,10 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 post: {
                     ...state.post,
-                    isLoading: true
+                    create: {
+                        ...state.post.create,
+                        isLoading: true
+                    }
                 }
             };
         case types.CREATE_POST[SUCCESS]:
@@ -53,8 +67,11 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 post: {
                     ...state.post,
-                    error: undefined,
-                    isLoading: false
+                    create: {
+                        ...state.post.create,
+                        error: undefined,
+                        isLoading: false
+                    }
                 }
             };
         case types.CREATE_POST[FAILURE]:
@@ -62,15 +79,56 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 post: {
                     ...state.post,
-                    error: action.error,
-                    isLoading: false
+                    create: {
+                        ...state.post.create,
+                        error: action.error,
+                        isLoading: false
+                    }
                 }
             };
-        case types.CLEAR_POST:
+        case types.CLEAR_CREATE_POST:
             return {
                 ...state,
                 post: {
-                    ...initialState.post
+                    ...state.post,
+                    create: {
+                        ...initialState.post.create
+                    }
+                }
+            };
+        case types.DELETE_POST[REQUEST]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    delete: {
+                        ...state.post.delete,
+                        isLoading: true
+                    }
+                }
+            };
+        case types.DELETE_POST[SUCCESS]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    delete: {
+                        ...state.post.delete,
+                        error: undefined,
+                        isLoading: false
+                    }
+                }
+            };
+        case types.DELETE_POST[FAILURE]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    delete: {
+                        ...state.post.delete,
+                        error: action.error,
+                        isLoading: false
+                    }
                 }
             };
         default:
