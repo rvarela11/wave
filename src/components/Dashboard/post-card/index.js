@@ -1,5 +1,5 @@
 // @vendors
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,7 +10,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import DeleteIcon from '@mui/icons-material/Delete';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Typography from '@mui/material/Typography';
 
@@ -25,11 +24,24 @@ const PostCard = ({
 }) => {
     const dispatch = useDispatch();
     const { isLoading } = useSelector((state) => state.post.delete);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
     const handleDelete = useCallback((index) => {
-        console.log({ index });
+        setIsDeleting(true);
         dispatch(deletePost(index));
     });
+
+    const handleEdit = useCallback(() => {
+        setIsEditing(true);
+    });
+
+    useEffect(() => {
+        if (!isLoading) {
+            setIsDeleting(false);
+            setIsEditing(false);
+        }
+    }, [isLoading]);
 
     return (
         <Card sx={{ width: 500 }}>
@@ -43,12 +55,20 @@ const PostCard = ({
             </CardContent>
             <CardActions className="create-post-actions">
                 <LoadingButton
-                    loading={isLoading}
+                    loading={isDeleting}
                     loadingIndicator="Deleting..."
                     onClick={() => handleDelete(index)}
                     variant="text"
                 >
-                    <DeleteIcon />
+                    Delete
+                </LoadingButton>
+                <LoadingButton
+                    loading={isEditing}
+                    loadingIndicator="Editing..."
+                    onClick={() => handleEdit(index)}
+                    variant="text"
+                >
+                    Edit
                 </LoadingButton>
             </CardActions>
         </Card>
