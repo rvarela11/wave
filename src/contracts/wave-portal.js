@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import abi from '../utils/WavePortal.json';
 
-const contractAddress = '0x490e97022C88D9A0FeF672EC130f5ecabe372820';
+const contractAddress = '0x32d36823DF1da404E80A00B93A3963F04647d73f';
 const contractABI = abi.abi;
 
 export const getWavePortalContract = (ethereum) => {

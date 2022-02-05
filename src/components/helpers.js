@@ -1,6 +1,6 @@
 export const walletConnection = async () => {
     const metaMask = {
-        account: undefined,
+        address: undefined,
         error: undefined,
         hasWallet: false
     };
@@ -16,7 +16,7 @@ export const walletConnection = async () => {
         const accounts = await ethereum.request({ method: 'eth_accounts' });
 
         if (accounts.length !== 0) {
-            metaMask.account = [accounts];
+            [metaMask.address] = accounts;
         }
     } catch (error) {
         metaMask.error = error;
@@ -27,7 +27,7 @@ export const walletConnection = async () => {
 
 export const connectWallet = async () => {
     const metaMask = {
-        account: undefined,
+        address: undefined,
         error: undefined,
         hasWallet: true
     };
@@ -35,7 +35,7 @@ export const connectWallet = async () => {
     try {
         const { ethereum } = window;
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        metaMask.account = [accounts];
+        [metaMask.address] = accounts;
     } catch (error) {
         metaMask.error = error;
     }

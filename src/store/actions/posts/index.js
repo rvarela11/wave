@@ -53,7 +53,7 @@ export const createPost = (message) => async (dispatch) => {
         const { ethereum } = window;
         const wavePortalContract = getWavePortalContract(ethereum);
         dispatch(postActions.request({ ACTION_TYPES }));
-        const postTxn = await wavePortalContract.newPost(message, { gasLimit: 400000 });
+        const postTxn = await wavePortalContract.createPost(message, { gasLimit: 400000 });
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {

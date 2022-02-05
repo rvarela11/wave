@@ -24,11 +24,23 @@ import './style.css';
 const App = () => {
     const dispatch = useDispatch();
     const { isLoading, metaMask = {} } = useSelector((state) => state.user);
-    let content = (!metaMask.account) ? <MetaMask hasWallet={metaMask.hasWallet} /> : <Dashboard />;
+    let content = (!metaMask.address) ? <MetaMask hasWallet={metaMask.hasWallet} /> : <Dashboard />;
 
     useEffect(async () => {
         const wallet = await walletConnection();
         dispatch(updateMetaMask(wallet));
+    }, []);
+
+    useEffect(() => {
+        const onAccountsChanged = (accounts) => {
+            const updatedWallet = {
+                ...metaMask,
+                address: accounts[0]
+            };
+            dispatch(updateMetaMask(updatedWallet));
+        };
+
+        window.ethereum.on('accountsChanged', onAccountsChanged);
     }, []);
 
     if (isLoading) {
@@ -41,7 +53,7 @@ const App = () => {
             <div
                 className={className(
                     'content',
-                    { metaMask: !metaMask.account }
+                    { metaMask: !metaMask.address }
                 )}
             >
                 {content}

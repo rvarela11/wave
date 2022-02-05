@@ -23,9 +23,12 @@ const PostCard = ({
     timestamp
 }) => {
     const dispatch = useDispatch();
+    const { metaMask } = useSelector((state) => state.user);
     const { isLoading } = useSelector((state) => state.post.delete);
+
     const [isDeleting, setIsDeleting] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const showActions = addr.toLowerCase() === metaMask.address.toLowerCase();
 
     const handleDelete = useCallback((index) => {
         setIsDeleting(true);
@@ -53,24 +56,28 @@ const PostCard = ({
             <CardContent>
                 <Typography component="h6" variant="h6">{message}</Typography>
             </CardContent>
-            <CardActions className="create-post-actions">
-                <LoadingButton
-                    loading={isDeleting}
-                    loadingIndicator="Deleting..."
-                    onClick={() => handleDelete(index)}
-                    variant="text"
-                >
-                    Delete
-                </LoadingButton>
-                <LoadingButton
-                    loading={isEditing}
-                    loadingIndicator="Editing..."
-                    onClick={() => handleEdit(index)}
-                    variant="text"
-                >
-                    Edit
-                </LoadingButton>
-            </CardActions>
+            {
+                showActions && (
+                    <CardActions className="create-post-actions">
+                        <LoadingButton
+                            loading={isDeleting}
+                            loadingIndicator="Deleting..."
+                            onClick={() => handleDelete(index)}
+                            variant="text"
+                        >
+                            Delete
+                        </LoadingButton>
+                        <LoadingButton
+                            loading={isEditing}
+                            loadingIndicator="Editing..."
+                            onClick={() => handleEdit(index)}
+                            variant="text"
+                        >
+                            Edit
+                        </LoadingButton>
+                    </CardActions>
+                )
+            }
         </Card>
     );
 };

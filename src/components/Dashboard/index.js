@@ -38,13 +38,13 @@ const Dashboard = () => {
 
         if (window.ethereum) {
             wavePortalContract = getWavePortalContract(window.ethereum);
-            wavePortalContract.on('NewPost', onNewPost);
+            wavePortalContract.on('CreatePost', onNewPost);
             wavePortalContract.on('DeletePost', onDeletePost);
         }
 
         return () => {
             if (wavePortalContract) {
-                wavePortalContract.off('NewPost', onNewPost);
+                wavePortalContract.off('CreatePost', onNewPost);
                 wavePortalContract.off('DeletePost', onDeletePost);
             }
         };
