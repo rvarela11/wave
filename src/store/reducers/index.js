@@ -14,6 +14,10 @@ const initialState = {
             error: undefined,
             isLoading: false
         },
+        update: {
+            error: undefined,
+            isLoading: false
+        },
         delete: {
             error: undefined,
             isLoading: false
@@ -93,6 +97,41 @@ export const reducer = (state = initialState, action) => {
                     ...state.post,
                     create: {
                         ...initialState.post.create
+                    }
+                }
+            };
+        case types.UPDATE_POST[REQUEST]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    update: {
+                        ...state.post.update,
+                        isLoading: true
+                    }
+                }
+            };
+        case types.UPDATE_POST[SUCCESS]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    update: {
+                        ...state.post.update,
+                        error: undefined,
+                        isLoading: false
+                    }
+                }
+            };
+        case types.UPDATE_POST[FAILURE]:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    update: {
+                        ...state.post.update,
+                        error: action.error,
+                        isLoading: false
                     }
                 }
             };

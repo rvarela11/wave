@@ -32,6 +32,10 @@ const Dashboard = () => {
             dispatch(updateAllPosts(post));
         };
 
+        const onUpdatePost = (posts) => {
+            dispatch(setAllPosts(posts));
+        };
+
         const onDeletePost = (posts) => {
             dispatch(setAllPosts(posts));
         };
@@ -39,12 +43,14 @@ const Dashboard = () => {
         if (window.ethereum) {
             wavePortalContract = getWavePortalContract(window.ethereum);
             wavePortalContract.on('CreatePost', onNewPost);
+            wavePortalContract.on('UpdatePost', onUpdatePost);
             wavePortalContract.on('DeletePost', onDeletePost);
         }
 
         return () => {
             if (wavePortalContract) {
                 wavePortalContract.off('CreatePost', onNewPost);
+                wavePortalContract.on('UpdatePost', onUpdatePost);
                 wavePortalContract.off('DeletePost', onDeletePost);
             }
         };

@@ -48,12 +48,31 @@ export const updateAllPosts = (post) => async (dispatch) => {
 };
 
 export const createPost = (message) => async (dispatch) => {
+    console.log('createPost ACTION');
     const ACTION_TYPES = types.CREATE_POST;
     try {
         const { ethereum } = window;
         const wavePortalContract = getWavePortalContract(ethereum);
         dispatch(postActions.request({ ACTION_TYPES }));
         const postTxn = await wavePortalContract.createPost(message, { gasLimit: 400000 });
+        await postTxn.wait();
+        dispatch(postActions.success({ ACTION_TYPES }));
+    } catch (error) {
+        console.log(error);
+        const { code, message } = error;
+        const errorMessage = (code === 4001) ? message : 'Transaction failed';
+        dispatch(postActions.failure({ ACTION_TYPES, error: errorMessage }));
+    }
+};
+
+export const updatePost = (message, index) => async (dispatch) => {
+    console.log('updatePost ACTION');
+    const ACTION_TYPES = types.UPDATE_POST;
+    try {
+        const { ethereum } = window;
+        const wavePortalContract = getWavePortalContract(ethereum);
+        dispatch(postActions.request({ ACTION_TYPES }));
+        const postTxn = await wavePortalContract.updatePost(message, index, { gasLimit: 400000 });
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {

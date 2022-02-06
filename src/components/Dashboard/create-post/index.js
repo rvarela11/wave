@@ -14,10 +14,11 @@ import Typography from '@mui/material/Typography';
 // @actions
 import { clearPost, createPost } from '../../../store/actions/posts';
 
+// @constants
+import { CHARACTER_LIMIT } from '../constants';
+
 // @style
 import './style.css';
-
-const CHARACTER_LIMIT = 280;
 
 const CreatePost = () => {
     const dispatch = useDispatch();
