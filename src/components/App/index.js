@@ -15,6 +15,9 @@ import Footer from '../footer';
 // @actions
 import { updateMetaMask } from '../../store/actions/meta-mask';
 
+// @context
+import { AppContextProvider } from './context';
+
 // @utils
 import { walletConnection } from '../helpers';
 
@@ -31,35 +34,25 @@ const App = () => {
         dispatch(updateMetaMask(wallet));
     }, []);
 
-    useEffect(() => {
-        const onAccountsChanged = (accounts) => {
-            const updatedWallet = {
-                ...metaMask,
-                address: accounts[0]
-            };
-            dispatch(updateMetaMask(updatedWallet));
-        };
-
-        window.ethereum.on('accountsChanged', onAccountsChanged);
-    }, []);
-
     if (isLoading) {
         content = <CircularProgress />;
     }
 
     return (
-        <div className="app">
-            <Header />
-            <div
-                className={className(
-                    'content',
-                    { metaMask: !metaMask.address }
-                )}
-            >
-                {content}
+        <AppContextProvider>
+            <div className="app">
+                <Header />
+                <div
+                    className={className(
+                        'content',
+                        { metaMask: !metaMask.address || isLoading }
+                    )}
+                >
+                    {content}
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </AppContextProvider>
     );
 };
 

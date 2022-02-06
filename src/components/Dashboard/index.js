@@ -11,10 +11,7 @@ import CreatePost from './create-post';
 import PostCard from './post-card';
 
 // @actions
-import { getAllPosts, setAllPosts, updateAllPosts } from '../../store/actions/posts';
-
-// @contracts
-import { getWavePortalContract } from '../../contracts/wave-portal';
+import { getAllPosts } from '../../store/actions/posts';
 
 // @style
 import './style.css';
@@ -24,37 +21,6 @@ const Dashboard = () => {
     const { posts } = useSelector((state) => state);
 
     useEffect(() => dispatch(getAllPosts()), []);
-
-    useEffect(() => {
-        let wavePortalContract;
-        const onNewPost = (addr, message, timestamp) => {
-            const post = { addr, message, timestamp };
-            dispatch(updateAllPosts(post));
-        };
-
-        const onUpdatePost = (posts) => {
-            dispatch(setAllPosts(posts));
-        };
-
-        const onDeletePost = (posts) => {
-            dispatch(setAllPosts(posts));
-        };
-
-        if (window.ethereum) {
-            wavePortalContract = getWavePortalContract(window.ethereum);
-            wavePortalContract.on('CreatePost', onNewPost);
-            wavePortalContract.on('UpdatePost', onUpdatePost);
-            wavePortalContract.on('DeletePost', onDeletePost);
-        }
-
-        return () => {
-            if (wavePortalContract) {
-                wavePortalContract.off('CreatePost', onNewPost);
-                wavePortalContract.on('UpdatePost', onUpdatePost);
-                wavePortalContract.off('DeletePost', onDeletePost);
-            }
-        };
-    }, []);
 
     return (
         <div className="dashboard">
