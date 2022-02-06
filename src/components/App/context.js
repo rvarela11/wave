@@ -33,7 +33,17 @@ const AppContextProvider = ({ children }) => {
             dispatch(updateMetaMask(updatedWallet));
         };
 
-        window.ethereum.on('accountsChanged', onAccountsChanged);
+        const { ethereum } = window;
+
+        if (ethereum) {
+            ethereum.on('accountsChanged', onAccountsChanged);
+        }
+
+        return () => {
+            if (ethereum) {
+                ethereum.off('accountsChanged', onAccountsChanged);
+            }
+        };
     }, []);
 
     useEffect(() => {
@@ -62,7 +72,7 @@ const AppContextProvider = ({ children }) => {
         return () => {
             if (wavePortalContract) {
                 wavePortalContract.off('CreatePost', onNewPost);
-                wavePortalContract.on('UpdatePost', onUpdatePost);
+                wavePortalContract.off('UpdatePost', onUpdatePost);
                 wavePortalContract.off('DeletePost', onDeletePost);
             }
         };
