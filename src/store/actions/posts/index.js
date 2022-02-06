@@ -48,7 +48,6 @@ export const updateAllPosts = (post) => async (dispatch) => {
 };
 
 export const createPost = (message) => async (dispatch) => {
-    console.log('createPost ACTION');
     const ACTION_TYPES = types.CREATE_POST;
     try {
         const { ethereum } = window;
@@ -66,7 +65,6 @@ export const createPost = (message) => async (dispatch) => {
 };
 
 export const updatePost = (message, index) => async (dispatch) => {
-    console.log('updatePost ACTION');
     const ACTION_TYPES = types.UPDATE_POST;
     try {
         const { ethereum } = window;
