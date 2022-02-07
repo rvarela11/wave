@@ -14,23 +14,24 @@ import { getWavePortalContract } from '../../../contracts/wave-portal';
 
 const postActions = {
     request: ({ ACTION_TYPES }) => createAction(ACTION_TYPES[REQUEST]),
-    success: ({ ACTION_TYPES }) => createAction(ACTION_TYPES[SUCCESS]),
+    success: ({ ACTION_TYPES, data }) => createAction(ACTION_TYPES[SUCCESS], { data }),
     failure: ({ ACTION_TYPES, error }) => createAction(ACTION_TYPES[FAILURE], { error })
 };
 
 export const getAllPosts = () => async (dispatch) => {
-    let posts = [];
+    const ACTION_TYPES = types.GET_ALL_POSTS;
     try {
         const { ethereum } = window;
         const wavePortalContract = getWavePortalContract(ethereum);
-        posts = await wavePortalContract.getAllPosts();
+        dispatch(postActions.request({ ACTION_TYPES }));
+        const posts = await wavePortalContract.getAllPosts();
+        dispatch(postActions.success({ ACTION_TYPES, data: posts }));
     } catch (error) {
         console.log(error);
+        const { code, message } = error;
+        const errorMessage = (code === 4001) ? message : 'Transaction failed';
+        dispatch(postActions.failure({ ACTION_TYPES, error: errorMessage }));
     }
-    dispatch({
-        type: types.GET_ALL_POSTS,
-        posts
-    });
 };
 
 export const setAllPosts = (posts) => async (dispatch) => {

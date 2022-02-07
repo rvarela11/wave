@@ -1,16 +1,6 @@
 .dashboard {
   width: 500px;
-}
-
-.dashboard,
-.dashboard__posts {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.dashboard__posts-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }

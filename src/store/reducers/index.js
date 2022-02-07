@@ -24,7 +24,11 @@ const initialState = {
             isLoading: false
         }
     },
-    posts: [],
+    posts: {
+        error: undefined,
+        isLoading: false,
+        posts: []
+    },
     user: {
         isLoading: true
     }
@@ -40,11 +44,6 @@ export const reducer = (state = initialState, action) => {
                     isLoading: false,
                     metaMask: action.metaMask
                 }
-            };
-        case types.GET_ALL_POSTS:
-            return {
-                ...state,
-                posts: [...action.posts]
             };
         case types.SET_ALL_POSTS:
             return {
@@ -92,6 +91,34 @@ export const reducer = (state = initialState, action) => {
                         error: action.error,
                         isLoading: false
                     }
+                }
+            };
+        case types.GET_ALL_POSTS[REQUEST]:
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    isLoading: true
+                }
+            };
+        case types.GET_ALL_POSTS[SUCCESS]:
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    error: undefined,
+                    isLoading: false,
+                    posts: [...action.data]
+                }
+            };
+        case types.GET_ALL_POSTS[FAILURE]:
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    error: action.error,
+                    isLoading: false,
+                    posts: []
                 }
             };
         case types.UPDATE_POST[REQUEST]:
