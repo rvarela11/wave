@@ -1,3 +1,7 @@
+.dashboard {
+  width: 500px;
+}
+
 .dashboard,
 .dashboard__posts {
   display: flex;

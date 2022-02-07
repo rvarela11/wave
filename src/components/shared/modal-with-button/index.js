@@ -1,5 +1,5 @@
 // @vendors
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 // @material-ui
@@ -17,19 +17,28 @@ const ModalWithButton = ({
         label,
         variant
     },
-    children
+    children,
+    closeModal,
+    handleModalClose
 }) => {
     const [open, setOpen] = useState(false);
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleOpen = useCallback(() => setOpen(true));
+    const handleClose = useCallback(() => {
+        handleModalClose();
+        setOpen(false);
+    });
+
+    useEffect(() => {
+        if (closeModal) {
+            handleClose();
+        }
+    }, [closeModal]);
 
     return (
         <>
             <Button onClick={handleOpen} variant={variant}>{label}</Button>
             <Modal
-                aria-labelledby={`${label}-modal-title`}
-                aria-describedby={`${label}-modal-description`}
                 onClose={handleClose}
                 open={open}
                 sx={style}
@@ -45,7 +54,14 @@ ModalWithButton.propTypes = {
         label: PropTypes.string,
         variant: PropTypes.string
     }).isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    closeModal: PropTypes.bool,
+    handleModalClose: PropTypes.func
+};
+
+ModalWithButton.defaultProps = {
+    closeModal: false,
+    handleModalClose: () => {}
 };
 
 export default ModalWithButton;

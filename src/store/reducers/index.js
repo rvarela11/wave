@@ -11,6 +11,7 @@ import {
 const initialState = {
     post: {
         create: {
+            closeModal: false,
             error: undefined,
             isLoading: false
         },
@@ -62,6 +63,7 @@ export const reducer = (state = initialState, action) => {
                     ...state.post,
                     create: {
                         ...state.post.create,
+                        closeModal: false,
                         isLoading: true
                     }
                 }
@@ -73,6 +75,7 @@ export const reducer = (state = initialState, action) => {
                     ...state.post,
                     create: {
                         ...state.post.create,
+                        closeModal: true,
                         error: undefined,
                         isLoading: false
                     }
@@ -85,6 +88,7 @@ export const reducer = (state = initialState, action) => {
                     ...state.post,
                     create: {
                         ...state.post.create,
+                        closeModal: false,
                         error: action.error,
                         isLoading: false
                     }

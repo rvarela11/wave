@@ -97,7 +97,7 @@ const PostCard = ({
     };
 
     return (
-        <Card sx={{ width: 500 }}>
+        <Card>
             <CardHeader
                 avatar={<Avatar aria-label="Avatar"><AccountCircleIcon /></Avatar>}
                 title={addr}

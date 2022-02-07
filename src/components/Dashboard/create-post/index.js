@@ -1,5 +1,5 @@
 // @vendors
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // @material-ui
@@ -23,29 +23,25 @@ import { CHARACTER_LIMIT } from '../constants';
 // @style
 import './style.css';
 
+const button = {
+    label: 'Create Post',
+    variant: 'contained'
+};
+
 const CreatePost = () => {
     const dispatch = useDispatch();
 
-    const { isLoading } = useSelector((state) => state.post.create);
+    const { closeModal, isLoading } = useSelector((state) => state.post.create);
 
     const [value, setValue] = useState('');
-    const button = {
-        label: 'Create Post',
-        variant: 'contained'
-    };
 
     const handleChange = useCallback((e) => setValue(e.target.value));
     const handleClear = useCallback(() => setValue(''));
-    const handleSubmit = () => dispatch(createPost(value));
-
-    useEffect(() => {
-        if (!isLoading) {
-            handleClear();
-        }
-    }, [isLoading]);
+    const handleModalClose = useCallback(() => handleClear());
+    const handleSubmit = useCallback(() => dispatch(createPost(value)));
 
     return (
-        <ModalWithButton button={button}>
+        <ModalWithButton button={button} closeModal={closeModal} handleModalClose={handleModalClose}>
             <Card sx={{ width: 500 }}>
                 <CardContent className="create-post-content">
                     <Typography align="center" component="h5" variant="h5">Create post</Typography>
