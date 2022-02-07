@@ -10,7 +10,7 @@ import './style.css';
 
 const Dashboard = () => (
     <div className="dashboard">
-        <div className="dashboard__action-buttons">
+        <div>
             <CreatePost />
         </div>
         <Posts />
