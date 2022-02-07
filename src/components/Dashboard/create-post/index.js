@@ -43,7 +43,7 @@ const CreatePost = () => {
     return (
         <ModalWithButton button={button} closeModal={closeModal} handleModalClose={handleModalClose}>
             <Card sx={{ width: 500 }}>
-                <CardContent className="create-post-content">
+                <CardContent className="create-post__content">
                     <Typography align="center" component="h5" variant="h5">Create post</Typography>
                     <TextField
                         disabled={isLoading}
@@ -58,7 +58,7 @@ const CreatePost = () => {
                         value={value}
                     />
                 </CardContent>
-                <CardActions className="create-post-actions">
+                <CardActions className="create-post__actions">
                     <Button disabled={isLoading} onClick={handleClear} variant="contained">Clear</Button>
                     <LoadingButton loading={isLoading} onClick={handleSubmit} variant="contained">Submit</LoadingButton>
                 </CardActions>

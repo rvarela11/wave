@@ -1,16 +1,9 @@
-.create-post-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.create-post-content {
+.create-post__content {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.create-post-actions {
+.create-post__actions {
   justify-content: flex-end;
 }
