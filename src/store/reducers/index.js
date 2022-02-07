@@ -48,12 +48,20 @@ export const reducer = (state = initialState, action) => {
         case types.SET_ALL_POSTS:
             return {
                 ...state,
-                posts: [...action.posts]
+                posts: {
+                    ...state.posts,
+                    posts: [...action.posts]
+                }
             };
         case types.UPDATE_ALL_POSTS:
             return {
                 ...state,
-                posts: [...state.posts, action.post]
+                posts: {
+                    ...state.posts,
+                    error: undefined,
+                    isLoading: false,
+                    posts: [...state.posts.posts, action.post]
+                }
             };
         case types.CREATE_POST[REQUEST]:
             return {
