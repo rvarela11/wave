@@ -97,7 +97,3 @@ export const deletePost = (index) => async (dispatch) => {
         dispatch(postActions.failure({ ACTION_TYPES, error: errorMessage }));
     }
 };
-
-export const clearPost = () => ({
-    type: types.CLEAR_CREATE_POST
-});

@@ -90,16 +90,6 @@ export const reducer = (state = initialState, action) => {
                     }
                 }
             };
-        case types.CLEAR_CREATE_POST:
-            return {
-                ...state,
-                post: {
-                    ...state.post,
-                    create: {
-                        ...initialState.post.create
-                    }
-                }
-            };
         case types.UPDATE_POST[REQUEST]:
             return {
                 ...state,

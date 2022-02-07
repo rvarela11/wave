@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import ModalWithButton from '../../shared/modal-with-button';
 
 // @actions
-import { clearPost, createPost } from '../../../store/actions/posts';
+import { createPost } from '../../../store/actions/posts';
 
 // @constants
 import { CHARACTER_LIMIT } from '../constants';
@@ -26,30 +26,23 @@ import './style.css';
 const CreatePost = () => {
     const dispatch = useDispatch();
 
-    const { error, isLoading } = useSelector((state) => state.post.create);
+    const { isLoading } = useSelector((state) => state.post.create);
 
     const [value, setValue] = useState('');
-    // const [postError, setPostError] = useState(undefined);
     const button = {
         label: 'Create Post',
         variant: 'contained'
     };
 
     const handleChange = useCallback((e) => setValue(e.target.value));
-    const handleClear = useCallback(() => {
-        setValue('');
-        dispatch(clearPost());
-    });
+    const handleClear = useCallback(() => setValue(''));
     const handleSubmit = () => dispatch(createPost(value));
 
     useEffect(() => {
         if (!isLoading) {
-            if (!error) {
-                handleClear();
-            }
-            // setPostError(error);
+            handleClear();
         }
-    }, [error, isLoading]);
+    }, [isLoading]);
 
     return (
         <ModalWithButton button={button}>
@@ -58,7 +51,6 @@ const CreatePost = () => {
                     <Typography align="center" component="h5" variant="h5">Create post</Typography>
                     <TextField
                         disabled={isLoading}
-                        // error={postError !== undefined}
                         helperText={`${value.length} / ${CHARACTER_LIMIT}`}
                         fullWidth
                         id="textfield-create-a-post"
@@ -69,7 +61,6 @@ const CreatePost = () => {
                         rows={5}
                         value={value}
                     />
-                    <Typography variant="body2">Error</Typography>
                 </CardContent>
                 <CardActions className="create-post-actions">
                     <Button disabled={isLoading} onClick={handleClear} variant="contained">Clear</Button>
