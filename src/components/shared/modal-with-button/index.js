@@ -13,7 +13,7 @@ const style = {
 };
 
 const ModalWithButton = ({
-    button: {
+    buttonParams: {
         label,
         variant
     },
@@ -50,7 +50,7 @@ const ModalWithButton = ({
 };
 
 ModalWithButton.propTypes = {
-    button: PropTypes.shape({
+    buttonParams: PropTypes.shape({
         label: PropTypes.string,
         variant: PropTypes.string
     }).isRequired,

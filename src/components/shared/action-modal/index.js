@@ -1,6 +1,6 @@
 // @vendors
 import React, { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // @material-ui
 import Button from '@mui/material/Button';
@@ -12,39 +12,34 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 // @components
-import ModalWithButton from '../../shared/modal-with-button';
-
-// @actions
-import { createPost } from '../../../store/actions/posts';
+import ModalWithButton from '../modal-with-button';
 
 // @constants
-import { CHARACTER_LIMIT } from '../constants';
+import { CHARACTER_LIMIT } from '../../dashboard/constants';
 
 // @style
 import './style.css';
 
-const button = {
-    label: 'Create Post',
-    variant: 'contained'
-};
-
-const CreatePost = () => {
-    const dispatch = useDispatch();
-
-    const { closeModal, isLoading } = useSelector((state) => state.post.create);
-
-    const [value, setValue] = useState('');
+const ActionModal = ({
+    buttonParams,
+    closeModal,
+    isLoading,
+    message,
+    modalParams,
+    onSubmit
+}) => {
+    const [value, setValue] = useState(message);
 
     const handleChange = useCallback((e) => setValue(e.target.value));
     const handleClear = useCallback(() => setValue(''));
     const handleModalClose = useCallback(() => handleClear());
-    const handleSubmit = useCallback(() => dispatch(createPost(value)));
+    const handleSubmit = useCallback(() => onSubmit(value));
 
     return (
-        <ModalWithButton button={button} closeModal={closeModal} handleModalClose={handleModalClose}>
+        <ModalWithButton buttonParams={buttonParams} closeModal={closeModal} handleModalClose={handleModalClose}>
             <Card sx={{ width: 500 }}>
                 <CardContent className="create-post__content">
-                    <Typography align="center" component="h5" variant="h5">Create post</Typography>
+                    <Typography align="center" component="h5" variant="h5">{`${modalParams.title} post`}</Typography>
                     <TextField
                         disabled={isLoading}
                         helperText={`${value.length} / ${CHARACTER_LIMIT}`}
@@ -67,4 +62,25 @@ const CreatePost = () => {
     );
 };
 
-export default CreatePost;
+ActionModal.propTypes = {
+    buttonParams: PropTypes.shape({
+        label: PropTypes.string,
+        variant: PropTypes.string
+    }).isRequired,
+    closeModal: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    message: PropTypes.string,
+    modalParams: PropTypes.shape({
+        title: PropTypes.string
+    }).isRequired,
+    onSubmit: PropTypes.func
+};
+
+ActionModal.defaultProps = {
+    closeModal: false,
+    isLoading: false,
+    message: '',
+    onSubmit: () => {}
+};
+
+export default ActionModal;

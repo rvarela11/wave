@@ -2,7 +2,7 @@
 import React from 'react';
 
 // @components
-import CreatePost from './create-post';
+import CreatePost from './create-post-modal';
 import Posts from './posts-list';
 
 // @style

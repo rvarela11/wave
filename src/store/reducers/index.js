@@ -16,6 +16,7 @@ const initialState = {
             isLoading: false
         },
         update: {
+            closeModal: false,
             error: undefined,
             isLoading: false
         },
@@ -136,6 +137,7 @@ export const reducer = (state = initialState, action) => {
                     ...state.post,
                     update: {
                         ...state.post.update,
+                        closeModal: false,
                         isLoading: true
                     }
                 }
@@ -147,6 +149,7 @@ export const reducer = (state = initialState, action) => {
                     ...state.post,
                     update: {
                         ...state.post.update,
+                        closeModal: true,
                         error: undefined,
                         isLoading: false
                     }
@@ -159,6 +162,7 @@ export const reducer = (state = initialState, action) => {
                     ...state.post,
                     update: {
                         ...state.post.update,
+                        closeModal: false,
                         error: action.error,
                         isLoading: false
                     }

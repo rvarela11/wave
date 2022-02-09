@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 // @material-ui
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,7 +14,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Typography from '@mui/material/Typography';
 
 // @components
-import PostCardEdit from './edit';
+import EditPost from '../edit-post-modal';
 
 // @actions
 import { deletePost } from '../../../store/actions/posts';
@@ -35,20 +34,11 @@ const PostCard = ({
     const { post } = useSelector((state) => state);
 
     const [isDeleting, setIsDeleting] = useState(false);
-    const [isEditing, setIsEditing] = useState(false);
     const showActions = addr.toLowerCase() === metaMask.address.toLowerCase();
-
-    const handleCancel = useCallback(() => {
-        setIsEditing(false);
-    });
 
     const handleDelete = useCallback((index) => {
         setIsDeleting(true);
         dispatch(deletePost(index));
-    });
-
-    const handleEdit = useCallback(() => {
-        setIsEditing(true);
     });
 
     useEffect(() => {
@@ -57,17 +47,13 @@ const PostCard = ({
         }
     }, [post.delete.isLoading]);
 
-    useEffect(() => {
-        if (!post.update.isLoading) {
-            setIsEditing(false);
-        }
-    }, [post.update.isLoading]);
-
-    const displayCardContent = () => {
-        if (isEditing) {
-            return <PostCardEdit index={index} handleCancel={handleCancel} message={message} />;
-        }
-        return (
+    return (
+        <Card>
+            <CardHeader
+                avatar={<Avatar aria-label="Avatar"><AccountCircleIcon /></Avatar>}
+                title={addr}
+                subheader={timestamp}
+            />
             <>
                 <CardContent>
                     <Typography component="h6" variant="h6">{message}</Typography>
@@ -83,27 +69,11 @@ const PostCard = ({
                             >
                                 Delete
                             </LoadingButton>
-                            <Button
-                                onClick={() => handleEdit(index)}
-                                variant="text"
-                            >
-                                Edit
-                            </Button>
+                            <EditPost index={index} message={message} />
                         </CardActions>
                     )
                 }
             </>
-        );
-    };
-
-    return (
-        <Card>
-            <CardHeader
-                avatar={<Avatar aria-label="Avatar"><AccountCircleIcon /></Avatar>}
-                title={addr}
-                subheader={timestamp}
-            />
-            {displayCardContent()}
         </Card>
     );
 };
