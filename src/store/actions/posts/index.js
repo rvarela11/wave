@@ -18,6 +18,13 @@ const postActions = {
     failure: ({ ACTION_TYPES, error }) => createAction(ACTION_TYPES[FAILURE], { error })
 };
 
+const actionError = ({ dispatch, error, ACTION_TYPES }) => {
+    console.log(error);
+    const { code, message } = error;
+    const errorMessage = (code === 4001) ? message : 'Transaction failed';
+    dispatch(postActions.failure({ ACTION_TYPES, error: errorMessage }));
+};
+
 export const getAllPosts = () => async (dispatch) => {
     const ACTION_TYPES = types.GET_ALL_POSTS;
     try {
@@ -27,10 +34,7 @@ export const getAllPosts = () => async (dispatch) => {
         const posts = await wavePortalContract.getAllPosts();
         dispatch(postActions.success({ ACTION_TYPES, data: posts }));
     } catch (error) {
-        console.log(error);
-        const { code, message } = error;
-        const errorMessage = (code === 4001) ? message : 'Transaction failed';
-        dispatch(postActions.failure({ ACTION_TYPES, error: errorMessage }));
+        actionError({ dispatch, error, ACTION_TYPES });
     }
 };
 
@@ -58,10 +62,7 @@ export const createPost = (message) => async (dispatch) => {
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {
-        console.log(error);
-        const { code, message } = error;
-        const errorMessage = (code === 4001) ? message : 'Transaction failed';
-        dispatch(postActions.failure({ ACTION_TYPES, error: errorMessage }));
+        actionError({ dispatch, error, ACTION_TYPES });
     }
 };
 
@@ -75,10 +76,7 @@ export const updatePost = (message, index) => async (dispatch) => {
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {
-        console.log(error);
-        const { code, message } = error;
-        const errorMessage = (code === 4001) ? message : 'Transaction failed';
-        dispatch(postActions.failure({ ACTION_TYPES, error: errorMessage }));
+        actionError({ dispatch, error, ACTION_TYPES });
     }
 };
 
@@ -92,9 +90,6 @@ export const deletePost = (index) => async (dispatch) => {
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {
-        console.log(error);
-        const { code, message } = error;
-        const errorMessage = (code === 4001) ? message : 'Transaction failed';
-        dispatch(postActions.failure({ ACTION_TYPES, error: errorMessage }));
+        actionError({ dispatch, error, ACTION_TYPES });
     }
 };
