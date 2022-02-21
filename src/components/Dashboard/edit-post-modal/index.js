@@ -18,12 +18,12 @@ const modalParams = {
     title: 'Edit'
 };
 
-const EditPostModal = ({ index, message }) => {
+const EditPostModal = ({ id, message }) => {
     const dispatch = useDispatch();
 
     const { closeModal, isLoading } = useSelector((state) => state.post.update);
 
-    const handleSubmit = useCallback((value) => dispatch(updatePost(value, index)));
+    const handleSubmit = useCallback((value) => dispatch(updatePost(value, id)));
 
     return (
         <ActionModal
@@ -38,7 +38,7 @@ const EditPostModal = ({ index, message }) => {
 };
 
 EditPostModal.propTypes = {
-    index: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     message: PropTypes.string.isRequired
 };
 

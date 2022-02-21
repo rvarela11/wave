@@ -24,7 +24,7 @@ import './style.css';
 
 const PostCard = ({
     addr,
-    index,
+    id,
     message,
     timestamp
 }) => {
@@ -36,9 +36,9 @@ const PostCard = ({
     const [isDeleting, setIsDeleting] = useState(false);
     const showActions = addr.toLowerCase() === metaMask.address.toLowerCase();
 
-    const handleDelete = useCallback((index) => {
+    const handleDelete = useCallback((id) => {
         setIsDeleting(true);
-        dispatch(deletePost(index));
+        dispatch(deletePost(id));
     });
 
     useEffect(() => {
@@ -64,12 +64,12 @@ const PostCard = ({
                             <LoadingButton
                                 loading={isDeleting}
                                 loadingIndicator="Deleting..."
-                                onClick={() => handleDelete(index)}
+                                onClick={() => handleDelete(id)}
                                 variant="text"
                             >
                                 Delete
                             </LoadingButton>
-                            <EditPost index={index} message={message} />
+                            <EditPost id={id} message={message} />
                         </CardActions>
                     )
                 }
@@ -80,7 +80,7 @@ const PostCard = ({
 
 PostCard.propTypes = {
     addr: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     message: PropTypes.string.isRequired,
     timestamp: PropTypes.string.isRequired
 };

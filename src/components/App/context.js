@@ -49,8 +49,7 @@ const AppContextProvider = ({ children }) => {
     useEffect(() => {
         let wavePortalContract;
 
-        const onNewPost = (addr, message, timestamp) => {
-            const post = { addr, message, timestamp };
+        const onNewPost = (post) => {
             dispatch(updateAllPosts(post));
         };
 

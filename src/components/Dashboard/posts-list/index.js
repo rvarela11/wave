@@ -29,11 +29,16 @@ const Posts = () => {
         }
         return (
             <div className="dashboard__posts-list">
-                { posts.map(({ addr, message, timestamp }, index) => (
+                { posts.map(({
+                    addr,
+                    id,
+                    message,
+                    timestamp
+                }) => (
                     <PostCard
-                        key={index}
+                        key={id}
                         addr={addr}
-                        index={index}
+                        id={id}
                         message={message}
                         timestamp={moment(timestamp).format('LL')}
                     />
