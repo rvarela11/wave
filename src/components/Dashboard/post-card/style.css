@@ -1,3 +1,10 @@
-.post-card-actions {
+.post-card__actions {
   justify-content: flex-end;
+}
+
+.post-card__actions-buttons {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  gap: 4px;
 }

@@ -11,6 +11,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import LoadingButton from '@mui/lab/LoadingButton';
+import PushPinIcon from '@mui/icons-material/PushPin';
 import Typography from '@mui/material/Typography';
 
 // @components
@@ -61,16 +62,19 @@ const PostCard = ({
                 </CardContent>
                 {
                     showActions && (
-                        <CardActions className="post-card-actions">
-                            <LoadingButton
-                                loading={isDeleting}
-                                loadingIndicator="Deleting..."
-                                onClick={() => handleDelete(id)}
-                                variant="text"
-                            >
-                                Delete
-                            </LoadingButton>
-                            <EditPost id={id} isPostPinned={isPostPinned} message={message} />
+                        <CardActions className="post-card__actions">
+                            { isPostPinned && <PushPinIcon /> }
+                            <div className="post-card__actions-buttons">
+                                <LoadingButton
+                                    loading={isDeleting}
+                                    loadingIndicator="Deleting..."
+                                    onClick={() => handleDelete(id)}
+                                    variant="text"
+                                >
+                                    Delete
+                                </LoadingButton>
+                                <EditPost id={id} isPostPinned={isPostPinned} message={message} />
+                            </div>
                         </CardActions>
                     )
                 }
