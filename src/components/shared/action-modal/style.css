@@ -1,9 +1,14 @@
-.create-post__content {
+.action-modal__content{
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.create-post__actions {
-  justify-content: flex-end;
+.action-modal__actions {
+  justify-content: space-between;
+}
+
+.action-modal__actions-buttons {
+  display: flex;
+  gap: 4px;
 }

@@ -26,6 +26,7 @@ const ActionModal = ({
     isLoading,
     message,
     modalParams,
+    onPinMessage,
     onSubmit
 }) => {
     const [value, setValue] = useState(message);
@@ -33,12 +34,13 @@ const ActionModal = ({
     const handleChange = useCallback((e) => setValue(e.target.value));
     const handleClear = useCallback(() => setValue(''));
     const handleModalClose = useCallback(() => handleClear());
+    const handlePinMessage = useCallback(() => onPinMessage());
     const handleSubmit = useCallback(() => onSubmit(value));
 
     return (
         <ModalWithButton buttonParams={buttonParams} closeModal={closeModal} handleModalClose={handleModalClose}>
             <Card sx={{ width: 500 }}>
-                <CardContent className="create-post__content">
+                <CardContent className="action-modal__content">
                     <Typography align="center" component="h5" variant="h5">{`${modalParams.title} post`}</Typography>
                     <TextField
                         disabled={isLoading}
@@ -53,9 +55,12 @@ const ActionModal = ({
                         value={value}
                     />
                 </CardContent>
-                <CardActions className="create-post__actions">
-                    <Button disabled={isLoading} onClick={handleClear} variant="contained">Clear</Button>
-                    <LoadingButton loading={isLoading} onClick={handleSubmit} variant="contained">Submit</LoadingButton>
+                <CardActions className="action-modal__actions">
+                    <Button disabled={isLoading} onClick={handlePinMessage} variant="contained">Pin $5</Button>
+                    <div className="action-modal__actions-buttons">
+                        <Button disabled={isLoading} onClick={handleClear} variant="contained">Clear</Button>
+                        <LoadingButton loading={isLoading} onClick={handleSubmit} variant="contained">Submit</LoadingButton>
+                    </div>
                 </CardActions>
             </Card>
         </ModalWithButton>
@@ -73,6 +78,7 @@ ActionModal.propTypes = {
     modalParams: PropTypes.shape({
         title: PropTypes.string
     }).isRequired,
+    onPinMessage: PropTypes.func,
     onSubmit: PropTypes.func
 };
 
@@ -80,6 +86,7 @@ ActionModal.defaultProps = {
     closeModal: false,
     isLoading: false,
     message: '',
+    onPinMessage: () => {},
     onSubmit: () => {}
 };
 
