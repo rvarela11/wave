@@ -10,6 +10,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import Icon from '@mui/material/Icon';
 import LoadingButton from '@mui/lab/LoadingButton';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import Typography from '@mui/material/Typography';
@@ -52,7 +53,9 @@ const PostCard = ({
     return (
         <Card>
             <CardHeader
+                action={isPostPinned && <Icon><PushPinIcon /></Icon>}
                 avatar={<Avatar aria-label="Avatar"><AccountCircleIcon /></Avatar>}
+                className="post-card__header"
                 title={addr}
                 subheader={timestamp}
             />
@@ -63,18 +66,15 @@ const PostCard = ({
                 {
                     showActions && (
                         <CardActions className="post-card__actions">
-                            { isPostPinned && <PushPinIcon /> }
-                            <div className="post-card__actions-buttons">
-                                <LoadingButton
-                                    loading={isDeleting}
-                                    loadingIndicator="Deleting..."
-                                    onClick={() => handleDelete(id)}
-                                    variant="text"
-                                >
-                                    Delete
-                                </LoadingButton>
-                                <EditPost id={id} isPostPinned={isPostPinned} message={message} />
-                            </div>
+                            <LoadingButton
+                                loading={isDeleting}
+                                loadingIndicator="Deleting..."
+                                onClick={() => handleDelete(id)}
+                                variant="text"
+                            >
+                                Delete
+                            </LoadingButton>
+                            <EditPost id={id} isPostPinned={isPostPinned} message={message} />
                         </CardActions>
                     )
                 }

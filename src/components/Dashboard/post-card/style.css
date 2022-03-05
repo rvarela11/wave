@@ -1,10 +1,7 @@
-.post-card__actions {
-  justify-content: flex-end;
+.post-card__header .MuiCardHeader-action {
+  margin: 0;
 }
 
-.post-card__actions-buttons {
-  display: flex;
+.post-card__actions {
   justify-content: flex-end;
-  flex: 1;
-  gap: 4px;
 }
