@@ -22,7 +22,7 @@ const CreatePostModal = () => {
 
     const { closeModal, isLoading } = useSelector((state) => state.post.create);
 
-    const handleSubmit = useCallback((value) => dispatch(createPost(value)));
+    const handleSubmit = useCallback((values) => dispatch(createPost(values)));
 
     return (
         <ActionModal

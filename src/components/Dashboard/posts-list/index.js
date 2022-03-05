@@ -32,6 +32,7 @@ const Posts = () => {
                 { posts.map(({
                     addr,
                     id,
+                    isPostPinned,
                     message,
                     timestamp
                 }) => (
@@ -39,6 +40,7 @@ const Posts = () => {
                         key={id}
                         addr={addr}
                         id={id}
+                        isPostPinned={isPostPinned}
                         message={message}
                         timestamp={moment(timestamp).format('LL')}
                     />

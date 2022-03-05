@@ -7,7 +7,10 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import LoadingButton from '@mui/lab/LoadingButton';
+import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
@@ -20,22 +23,48 @@ import { CHARACTER_LIMIT } from '../../dashboard/constants';
 // @style
 import './style.css';
 
+const defaultState = {
+    postMessage: '',
+    isPostMessagePinned: false
+};
+
 const ActionModal = ({
     buttonParams,
     closeModal,
     isLoading,
+    isPostPinned,
     message,
     modalParams,
-    onPinMessage,
     onSubmit
 }) => {
-    const [value, setValue] = useState(message);
+    const [values, setValues] = useState({
+        isPostMessagePinned: isPostPinned,
+        postMessage: message
+    });
+    const { postMessage } = values;
+    console.log({ values });
 
-    const handleChange = useCallback((e) => setValue(e.target.value));
-    const handleClear = useCallback(() => setValue(''));
-    const handleModalClose = useCallback(() => handleClear());
-    const handlePinMessage = useCallback(() => onPinMessage());
-    const handleSubmit = useCallback(() => onSubmit(value));
+    const handleOnChangeTextField = useCallback((e) => {
+        setValues((state) => ({
+            ...state,
+            postMessage: e.target.value
+        }));
+    });
+    const handleOnChangeCheckbox = useCallback((e) => {
+        setValues((state) => ({
+            ...state,
+            isPostMessagePinned: e.target.checked
+        }));
+    });
+
+    const handleClearTextField = useCallback(() => {
+        setValues((state) => ({
+            ...state,
+            postMessage: ''
+        }));
+    });
+    const handleModalClose = useCallback(() => setValues(defaultState));
+    const handleSubmit = useCallback(() => onSubmit(values));
 
     return (
         <ModalWithButton buttonParams={buttonParams} closeModal={closeModal} handleModalClose={handleModalClose}>
@@ -44,22 +73,40 @@ const ActionModal = ({
                     <Typography align="center" component="h5" variant="h5">{`${modalParams.title} post`}</Typography>
                     <TextField
                         disabled={isLoading}
-                        helperText={`${value.length} / ${CHARACTER_LIMIT}`}
+                        helperText={`${postMessage.length} / ${CHARACTER_LIMIT}`}
                         fullWidth
                         id="textfield-create-a-post"
                         inputProps={{ maxLength: CHARACTER_LIMIT }}
                         label="What's on your mind?"
-                        onChange={handleChange}
+                        onChange={handleOnChangeTextField}
                         multiline
                         rows={5}
-                        value={value}
+                        value={postMessage}
                     />
                 </CardContent>
                 <CardActions className="action-modal__actions">
-                    <Button disabled={isLoading} onClick={handlePinMessage} variant="contained">Pin $5</Button>
+                    <FormControlLabel
+                        control={<Checkbox disabled={isPostPinned} onChange={handleOnChangeCheckbox} />}
+                        label="Pin post for $5"
+                    />
                     <div className="action-modal__actions-buttons">
-                        <Button disabled={isLoading} onClick={handleClear} variant="contained">Clear</Button>
-                        <LoadingButton loading={isLoading} onClick={handleSubmit} variant="contained">Submit</LoadingButton>
+                        <Button
+                            disabled={isLoading}
+                            onClick={handleClearTextField}
+                            variant="contained"
+                        >
+                            Clear
+                        </Button>
+                        <LoadingButton
+                            disabled={postMessage === ''}
+                            endIcon={<SendIcon />}
+                            loading={isLoading}
+                            loadingPosition="end"
+                            onClick={handleSubmit}
+                            variant="contained"
+                        >
+                            Send
+                        </LoadingButton>
                     </div>
                 </CardActions>
             </Card>
@@ -74,19 +121,19 @@ ActionModal.propTypes = {
     }).isRequired,
     closeModal: PropTypes.bool,
     isLoading: PropTypes.bool,
+    isPostPinned: PropTypes.bool,
     message: PropTypes.string,
     modalParams: PropTypes.shape({
         title: PropTypes.string
     }).isRequired,
-    onPinMessage: PropTypes.func,
     onSubmit: PropTypes.func
 };
 
 ActionModal.defaultProps = {
     closeModal: false,
     isLoading: false,
+    isPostPinned: false,
     message: '',
-    onPinMessage: () => {},
     onSubmit: () => {}
 };
 

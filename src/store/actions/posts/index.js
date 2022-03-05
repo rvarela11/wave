@@ -1,3 +1,6 @@
+// @venders
+import { ethers } from 'ethers';
+
 // @actionTypes
 import * as types from '../actionTypes';
 
@@ -52,13 +55,15 @@ export const updateAllPosts = (post) => async (dispatch) => {
     });
 };
 
-export const createPost = (message) => async (dispatch) => {
+export const createPost = ({ isPostMessagePinned = false, postMessage }) => async (dispatch) => {
     const ACTION_TYPES = types.CREATE_POST;
+    const ether = ethers.utils.parseEther(isPostMessagePinned ? '0.001' : '0');
+
     try {
         const { ethereum } = window;
         const wavePortalContract = getWavePortalContract(ethereum);
         dispatch(postActions.request({ ACTION_TYPES }));
-        const postTxn = await wavePortalContract.createPost(message, { gasLimit: 400000 });
+        const postTxn = await wavePortalContract.createPost(postMessage, ether, { gasLimit: 400000 });
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {

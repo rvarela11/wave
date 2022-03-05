@@ -18,7 +18,7 @@ const modalParams = {
     title: 'Edit'
 };
 
-const EditPostModal = ({ id, message }) => {
+const EditPostModal = ({ id, isPostPinned, message }) => {
     const dispatch = useDispatch();
 
     const { closeModal, isLoading } = useSelector((state) => state.post.update);
@@ -30,6 +30,7 @@ const EditPostModal = ({ id, message }) => {
             buttonParams={buttonParams}
             closeModal={closeModal}
             isLoading={isLoading}
+            isPostPinned={isPostPinned}
             message={message}
             modalParams={modalParams}
             onSubmit={handleSubmit}
@@ -39,6 +40,7 @@ const EditPostModal = ({ id, message }) => {
 
 EditPostModal.propTypes = {
     id: PropTypes.number.isRequired,
+    isPostPinned: PropTypes.bool.isRequired,
     message: PropTypes.string.isRequired
 };
 

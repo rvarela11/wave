@@ -25,6 +25,7 @@ import './style.css';
 const PostCard = ({
     addr,
     id,
+    isPostPinned,
     message,
     timestamp
 }) => {
@@ -69,7 +70,7 @@ const PostCard = ({
                             >
                                 Delete
                             </LoadingButton>
-                            <EditPost id={id} message={message} />
+                            <EditPost id={id} isPostPinned={isPostPinned} message={message} />
                         </CardActions>
                     )
                 }
@@ -81,6 +82,7 @@ const PostCard = ({
 PostCard.propTypes = {
     addr: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
+    isPostPinned: PropTypes.bool.isRequired,
     message: PropTypes.string.isRequired,
     timestamp: PropTypes.string.isRequired
 };
