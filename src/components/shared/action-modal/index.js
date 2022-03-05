@@ -23,11 +23,6 @@ import { CHARACTER_LIMIT } from '../../dashboard/constants';
 // @style
 import './style.css';
 
-const defaultState = {
-    postMessage: '',
-    isPostMessagePinned: false
-};
-
 const ActionModal = ({
     buttonParams,
     closeModal,
@@ -42,7 +37,7 @@ const ActionModal = ({
         postMessage: message
     });
     const { postMessage } = values;
-    console.log({ values });
+    console.log({ message, postMessage });
 
     const handleOnChangeTextField = useCallback((e) => {
         setValues((state) => ({
@@ -63,7 +58,12 @@ const ActionModal = ({
             postMessage: ''
         }));
     });
-    const handleModalClose = useCallback(() => setValues(defaultState));
+    const handleModalClose = useCallback(() => {
+        setValues({
+            isPostMessagePinned: isPostPinned,
+            postMessage: message
+        });
+    });
     const handleSubmit = useCallback(() => onSubmit(values));
 
     return (
@@ -85,10 +85,14 @@ const ActionModal = ({
                     />
                 </CardContent>
                 <CardActions className="action-modal__actions">
-                    <FormControlLabel
-                        control={<Checkbox disabled={isPostPinned} onChange={handleOnChangeCheckbox} />}
-                        label="Pin post for $5"
-                    />
+                    {
+                        !isPostPinned && (
+                            <FormControlLabel
+                                control={<Checkbox onChange={handleOnChangeCheckbox} />}
+                                label="Pin post for $5"
+                            />
+                        )
+                    }
                     <div className="action-modal__actions-buttons">
                         <Button
                             disabled={isLoading}

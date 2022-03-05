@@ -71,13 +71,13 @@ export const createPost = ({ isPostMessagePinned = false, postMessage }) => asyn
     }
 };
 
-export const updatePost = (message, index) => async (dispatch) => {
+export const updatePost = (message, id) => async (dispatch) => {
     const ACTION_TYPES = types.UPDATE_POST;
     try {
         const { ethereum } = window;
         const wavePortalContract = getWavePortalContract(ethereum);
         dispatch(postActions.request({ ACTION_TYPES }));
-        const postTxn = await wavePortalContract.updatePost(message, index, { gasLimit: 400000 });
+        const postTxn = await wavePortalContract.updatePost(message, id, { gasLimit: 400000 });
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {
@@ -85,13 +85,13 @@ export const updatePost = (message, index) => async (dispatch) => {
     }
 };
 
-export const deletePost = (index) => async (dispatch) => {
+export const deletePost = (id) => async (dispatch) => {
     const ACTION_TYPES = types.DELETE_POST;
     try {
         const { ethereum } = window;
         const wavePortalContract = getWavePortalContract(ethereum);
         dispatch(postActions.request({ ACTION_TYPES }));
-        const postTxn = await wavePortalContract.deletePost(index);
+        const postTxn = await wavePortalContract.deletePost(id);
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {

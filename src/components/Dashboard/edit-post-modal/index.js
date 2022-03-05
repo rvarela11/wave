@@ -23,7 +23,7 @@ const EditPostModal = ({ id, isPostPinned, message }) => {
 
     const { closeModal, isLoading } = useSelector((state) => state.post.update);
 
-    const handleSubmit = useCallback((value) => dispatch(updatePost(value, id)));
+    const handleSubmit = useCallback(({ postMessage }) => dispatch(updatePost(postMessage, id)));
 
     return (
         <ActionModal

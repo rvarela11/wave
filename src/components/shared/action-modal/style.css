@@ -5,10 +5,12 @@
 }
 
 .action-modal__actions {
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .action-modal__actions-buttons {
   display: flex;
+  justify-content: flex-end;
+  flex: 1;
   gap: 4px;
 }
