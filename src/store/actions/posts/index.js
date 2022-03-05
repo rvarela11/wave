@@ -15,6 +15,8 @@ import {
 // @contracts
 import { getWavePortalContract } from '../../../contracts/wave-portal';
 
+const pinnedMessageCost = '0.001';
+
 const postActions = {
     request: ({ ACTION_TYPES }) => createAction(ACTION_TYPES[REQUEST]),
     success: ({ ACTION_TYPES, data }) => createAction(ACTION_TYPES[SUCCESS], { data }),
@@ -57,7 +59,7 @@ export const updateAllPosts = (post) => async (dispatch) => {
 
 export const createPost = ({ isPostMessagePinned = false, postMessage }) => async (dispatch) => {
     const ACTION_TYPES = types.CREATE_POST;
-    const ether = ethers.utils.parseEther(isPostMessagePinned ? '0.001' : '0');
+    const ether = ethers.utils.parseEther(isPostMessagePinned ? pinnedMessageCost : '0');
 
     try {
         const { ethereum } = window;
@@ -71,13 +73,15 @@ export const createPost = ({ isPostMessagePinned = false, postMessage }) => asyn
     }
 };
 
-export const updatePost = (message, id) => async (dispatch) => {
+export const updatePost = ({ id, isPostMessagePinned = false, postMessage }) => async (dispatch) => {
     const ACTION_TYPES = types.UPDATE_POST;
+    const ether = ethers.utils.parseEther(isPostMessagePinned ? pinnedMessageCost : '0');
+
     try {
         const { ethereum } = window;
         const wavePortalContract = getWavePortalContract(ethereum);
         dispatch(postActions.request({ ACTION_TYPES }));
-        const postTxn = await wavePortalContract.updatePost(message, id, { gasLimit: 400000 });
+        const postTxn = await wavePortalContract.updatePost(id, postMessage, ether, { gasLimit: 400000 });
         await postTxn.wait();
         dispatch(postActions.success({ ACTION_TYPES }));
     } catch (error) {
