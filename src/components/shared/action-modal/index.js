@@ -37,7 +37,6 @@ const ActionModal = ({
         postMessage: message
     });
     const { postMessage } = values;
-    console.log({ message, postMessage });
 
     const handleOnChangeTextField = useCallback((e) => {
         setValues((state) => ({

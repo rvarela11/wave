@@ -1,4 +1,4 @@
-// @venders
+// @vendors
 import { ethers } from 'ethers';
 
 // @actionTypes
